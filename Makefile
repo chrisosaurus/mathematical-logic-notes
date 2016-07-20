@@ -3,7 +3,7 @@
 all: notes.pdf
 
 notes.pdf:
-	;
+	pdflatex notes.tex
 
 clean:
 	rm -f *.aux
