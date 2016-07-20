@@ -1,2 +1,6 @@
-*.aux
-*.log
+notes.aux
+notes.log
+notes.pdf
+notes.toc
+texput.log
+*.backup
