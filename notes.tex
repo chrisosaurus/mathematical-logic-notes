@@ -5,6 +5,100 @@
 
 \begin{document}
 
+\title {WIP Notes from \\ Mathematical Logic \\ Oxford texts in logic 3 \\ Ian Chrisell \& Wilfred Hodges}
+\author {Chris J. Hall}
+\maketitle
+
+
+\tableofcontents
+
+\chapter{introduction}
+
+This collection of notes is considered a Work In Progress
+The current up-to-date version of the notes can be found at https://github.com/mkfifo/mathematical-logic-notes
+
+
+The text covered by these notes is ``Mathematical Logic'' by Ian Chriswell and Wilfred Hodges,
+Published by Oxford logic, Oxfored texts in logic 3.
+
+The pusposes of these notes is in no way to serve as a substitute for the text.
+
+When reading through the text I was often annoyed at the lack of complete solutions - many are ommitted.
+
+
+I am writing these notes as a collection of all my fully worked answers, along with some minor additions that I found useful
+along the way.
+
+
+\chapter{Natural deduction logic}
+
+
+
+
+\chapter{Propositional logic}
+
 hello world
+
+
+\chapter{natural logic rules}
+A collection of the naturak logic rules introduced in the text, and the place to find them
+
+\chapter{sequent rules}
+A collection of the sequent rules introduced in the text, and the place to find them
+
+\chapter{syntax examples}
+This section is to keep notes for myself on how to style latex
+
+\begin{prooftree}
+ \AxiomC{[D]}
+ \noLine
+ \UnaryInfC{$\phi$}
+ 
+ \AxiomC{[D']}
+ \noLine
+ \UnaryInfC{$\psi$}
+ 
+ \RightLabel{$(\wedge I)$}
+ \BinaryInfC{$(\phi \wedge \psi)$}
+ 
+ \AxiomC{[D'']}
+ \noLine
+ \UnaryInfC{$\chi$}
+ 
+ \RightLabel{$(\wedge I)$}
+ \BinaryInfC{$((\phi \wedge \psi) \wedge \chi)$}
+
+\end{prooftree}
+
+\bigskip
+
+\begin{tabular}{c}
+  $P_1$    \\
+  $P_2$    \\
+  ...      \\
+  $P_{12}$ \\
+  ...      \\
+  $P_N$    \\
+\end{tabular}
+
+\bigskip
+
+\begin{tabular} {c | c c}
+ x & 1 & 2  \\ \hline
+ 4 & 4 & 8  \\
+ 5 & 5 & 10 \\
+\end{tabular}
+
+\bigskip
+
+\begin{tabular} {c | c c}
+ $\wedge$ & T & F \\
+    \hline
+ T  & T & F \\
+ F  & F & F \\
+\end{tabular}
+
+\bigskip
+
 
 \end{document}
