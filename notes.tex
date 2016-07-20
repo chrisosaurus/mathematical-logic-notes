@@ -3,7 +3,37 @@
 \usepackage{amssymb}
 \usepackage{external/bussproofs}
 
+
 \begin{document}
+
+\newcommand{\RULE}[3]{
+  % #1 ``natural deduction'' or ``sequent``
+  % #2 name of rule (e.g. ''axiom``)
+  % #3 page number
+  {
+  \iffalse
+    TODO FIXME automate adding to rules sections
+  \fi
+  \bigskip
+  \textbf{\uppercase{#1 rule (#2 rule)}} - page #3 \\
+  \indent
+  }
+}
+
+\newcommand{\EXERCISE}[3]{
+  % #1 exercise number
+  % #2 page number
+  % #3 exercise summary
+  {
+  \iffalse
+    TODO FIXME automate adding to exercises list?
+  \fi
+  \bigskip
+  Exercise #1 - page #2 \\
+  \indent #3 \\
+  \indent
+  }
+}
 
 \title {WIP Notes from \\ Mathematical Logic \\ Oxford texts in logic 3 \\ Ian Chrisell \& Wilfred Hodges}
 \author {Chris J. Hall}
@@ -32,6 +62,38 @@ along the way.
 
 \chapter{Natural deduction logic}
 
+
+Definition 2.1.2 - page 7
+  A sequent is an expression of the form
+
+  $(\Gamma \vdash \psi)$
+
+  where $\psi$ is a statement (the conclusion of the sequent) and $\Gamma$ is a set of the statements (the assumptions of the sequent).
+
+  We can read this as  ``$\Gamma entails \psi$'' (``gamma entails psi'')
+
+(2.2) The sequent $(\Gamma \vdash \psi)$ means
+  there is a proof whose conclusion is $\psi$ and whose undischarged assumptions are all in the set $\Gamma$.
+
+When (2.2) is correct we say that the sequent is correct.
+
+The set $\Gamma$ can be empty in which case we write $(\vdash \psi)$ (read ``turnstyle psi'')
+this sequent is correct if and only if there is a proof of $\psi$ with no undischarged assumptions.
+
+\bigskip
+
+\RULE{sequent}{axiom}{8}
+  If $\psi \subset \Gamma$ then the sequent $(\Gamma \vdash \psi)$ is correct.
+
+\RULE{sequent}{transitive}{8}
+  If $(\Delta \vdash \psi)$ is correct,
+  and for every $\delta$ in $\Delta$ $(\Gamma \vdash \delta)$ is correct,
+  then $(\Gamma \vdash \psi)$ is correct.
+
+\RULE{natural deduction}{axiom}{8}
+  Let $\phi$ be a statement, then
+    $\phi$
+  is a derivtion, its conclusion $\phi$, and its undischarged assumptions $\phi$.
 
 
 
