@@ -181,12 +181,22 @@ this sequent is correct if and only if there is a proof of $\psi$ with no undisc
 }
 
 \EXERCISE{2.1.3 B}{9}{
-  If the sequent $(\{\psi\} \vdash \psi)$ is correct,
+  If the sequent $(\{\phi\} \vdash \psi)$ is correct,
   then so is the sequent $(\{\psi\} \vdash \phi)$.
 }{
-  ??? Correct.
+  Incorrect.
   
-  Reasoning goes here.
+  This means that if $\phi$ entails $\psi$ then the inverse is true,
+  there are cases thought where this does not hold.
+  
+  For example is $\phi$ is $``x > 1''$ and $\psi$ is $``x > 0''$ we can see how
+  if $``x > 1''$ is true, this always means that $``x > 0''$ is also true,
+  however if all we know is that $``x > 0''$ we cannot be sure that $``x > 1''$ is also true.
+  
+  Entails can be thought of as being similar to propositional logic's ``implies'' ($\rightarrow$),
+  $A \rightarrow B$ doesn't mean $B \rightarrow A$,
+  however there is a relation that does mean this: if-and-only-iff ($\Leftrightarrow$);
+  means that $A \Leftrightarrow B$ implies both $A \rightarrow B$ and $B \rightarrow A$.
 }
 
 \EXERCISE{2.1.3 C}{9}{
