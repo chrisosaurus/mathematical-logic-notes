@@ -49,7 +49,7 @@
   \bigskip
   \subsection{
     \texorpdfstring{
-      \uppercase{#1 rule (#2 rule)}
+      \uppercase{#1 rule (#2)}
     }{
       #1 rule (#2 rule)
     }
@@ -151,17 +151,17 @@ this sequent is correct if and only if there is a proof of $\psi$ with no undisc
 
 \bigskip
 
-\RULE{sequent}{axiom}{8}{
+\RULE{sequent}{axiom rule}{8}{
   If $\psi \subset \Gamma$ then the sequent $(\Gamma \vdash \psi)$ is correct.
 }
   
-\RULE{sequent}{transitive}{8}{
+\RULE{sequent}{transitive rule}{8}{
   If $(\Delta \vdash \psi)$ is correct,
   and for every $\delta$ in $\Delta$ $(\Gamma \vdash \delta)$ is correct,
   then $(\Gamma \vdash \psi)$ is correct.
 }
   
-\RULE{natural deduction}{axiom}{8}{
+\RULE{natural deduction}{axiom rule}{8}{
   Let $\phi$ be a statement, then
     $\phi$
   is a derivation, its conclusion $\phi$, and its undischarged assumptions $\phi$.
@@ -222,6 +222,55 @@ this sequent is correct if and only if there is a proof of $\psi$ with no undisc
   so the value of $(\{ ``x = 1'' \} \cup \{ ``x = 2'' \})$ is $\{ ``x = 1'', ``x = 2'' \}$ and $( \{ ``x = 1'', ``x = 2'' \} \vdash ``x > 0'' )$ is corect.
 }
 
+
+\section{arguments introducing 'and'}
+
+\RULE{sequent}{$\wedge$I}{10}{
+  If $(\Gamma \vdash \phi)$ and $(\Delta \vdash \psi)$ are correct,
+  then $(\Gamma \cup \Delta \vdash (\phi \wedge \psi))$ is correct.
+}
+
+\RULE{natural deduction}{$\wedge$I}{11}{
+  If 
+
+\begin{prooftree}
+ \AxiomC{[D]}
+ \noLine
+ \UnaryInfC{$\phi$}
+\end{prooftree}
+
+  and
+
+\begin{prooftree}
+ \AxiomC{[D']}
+ \noLine
+ \UnaryInfC{$\psi$}
+
+\end{prooftree}
+
+  are derivations of $\phi$ and $\psi$ respectively, then
+
+\begin{prooftree}
+ \AxiomC{[D]}
+ \noLine
+ \UnaryInfC{$\phi$}
+ 
+ \AxiomC{[D']}
+ \noLine
+ \UnaryInfC{$\psi$}
+ 
+ \RightLabel{$(\wedge I)$}
+ \BinaryInfC{$(\phi \wedge \psi)$}
+
+\end{prooftree}
+    
+    is a derivation of $(\phi \wedge \psi$).
+    its undischarged assumptions are those of D together with those of D'.
+}
+
+\EXERCISE{2.2.1}{13}{
+}{
+}
 
 \chapter{Propositional logic}
 
