@@ -1,50 +1,89 @@
 \documentclass[a4paper, titlepage]{report}
 
+\usepackage{hyperref}
+
 \usepackage[a4paper, margin=1in]{geometry}
 
-\usepackage{amssymb}
+\usepackage{external/amssymb}
 \usepackage{external/bussproofs}
-
+\usepackage{external/cancel}
 
 \begin{document}
 
-\newcommand{\RULE}[3]{
+\newcommand{\RULE}[4]{
   % #1 ``natural deduction'' or ``sequent``
   % #2 name of rule (e.g. ''axiom``)
   % #3 page number
+  % #4 body of rule
   {
   \iffalse
     TODO FIXME automate adding to rules sections
   \fi
   \bigskip
-  \textbf{\uppercase{#1 rule (#2 rule)}} - page #3 \\
+  \subsection{
+    \texorpdfstring{
+      \uppercase{#1 rule (#2 rule)}
+    }{
+      #1 rule (#2 rule)
+    }
+  }
+  from page #3 \\
   \indent
+  #4
   }
 }
 
-\newcommand{\EXERCISE}[3]{
+\newcommand{\EXERCISE}[4]{
   % #1 exercise number
   % #2 page number
   % #3 exercise summary
+  % #4 exercise solution
   {
   \iffalse
     TODO FIXME automate adding to exercises list?
   \fi
   \bigskip
-  Exercise #1 - page #2 \\
-  \indent #3 \\
+  \subsection{
+    \texorpdfstring{
+      Exercise #1
+    }{
+      Exercise #1
+    }
+  }
+  from page #2 \\
   \indent
+  #3 \\
+  \indent
+  #4
   }
 }
 
+% alpha page numbering for title page
+% to suppress warning
+\pagenumbering{alph}
+
+\begin{titlepage}
 \title {WIP Notes from \\ Mathematical Logic \\ Oxford texts in logic 3 \\ Ian Chrisell \& Wilfred Hodges}
 \author {Chris J. Hall}
 \maketitle
+\end{titlepage}
 
-
+% roman page numbering
+\pagenumbering{roman}
+% http://tex.stackexchange.com/questions/17877/how-to-show-subsections-and-subsubsections-in-toc
+% show chapter, section, and subsection in TOC
+\setcounter{tocdepth}{2}
+% number chapter, and section (but not subsection) in TOC
+\setcounter{secnumdepth}{1}
 \tableofcontents
 
+
+% start page number 1 here
+\newpage
+\pagenumbering{arabic}
+
 \chapter{introduction}
+
 
 This collection of notes is considered a Work In Progress
 The current up-to-date version of the notes can be found at https://github.com/mkfifo/mathematical-logic-notes
@@ -61,9 +100,13 @@ When reading through the text I was often annoyed at the lack of complete soluti
 I am writing these notes as a collection of all my fully worked answers, along with some minor additions that I found useful
 along the way.
 
+There may be some exercises missing, some of the earlier examples seemed too trivial / boring - these should be very few
+and any PRs to include them are welcome.
+
 
 \chapter{Natural deduction logic}
 
+\section{proofs and sequents}
 
 Definition 2.1.2 - page 7
   A sequent is an expression of the form
@@ -84,19 +127,66 @@ this sequent is correct if and only if there is a proof of $\psi$ with no undisc
 
 \bigskip
 
-\RULE{sequent}{axiom}{8}
+\RULE{sequent}{axiom}{8}{
   If $\psi \subset \Gamma$ then the sequent $(\Gamma \vdash \psi)$ is correct.
-
-\RULE{sequent}{transitive}{8}
+}
+  
+\RULE{sequent}{transitive}{8}{
   If $(\Delta \vdash \psi)$ is correct,
   and for every $\delta$ in $\Delta$ $(\Gamma \vdash \delta)$ is correct,
   then $(\Gamma \vdash \psi)$ is correct.
-
-\RULE{natural deduction}{axiom}{8}
+}
+  
+\RULE{natural deduction}{axiom}{8}{
   Let $\phi$ be a statement, then
     $\phi$
   is a derivation, its conclusion $\phi$, and its undischarged assumptions $\phi$.
+}
 
+\EXERCISE{2.1.3 A}{9}{
+  If the sequent $(\Gamma \vdash \psi)$ is a correct sequent,
+  and every statement in $\Gamma$ is also in $\Delta$,
+  then the sequent $(\Delta \vdash \phi)$ is also correct.
+}{
+  Correct.
+  
+  If $\Delta$ is a superset of $\Gamma$ (as in this question) then we can
+  always build $\psi$ from it.
+  
+  if $(\Gamma \vdash \psi)$ and $(\Delta \subseteq \Gamma)$ then $(\Delta \vdash \psi)$.
+}
+
+\EXERCISE{2.1.3 B}{9}{
+  If the sequent $(\{\psi\} \vdash \psi)$ is correct,
+  then so is the sequent $(\{\psi\} \vdash \phi)$.
+}{
+  ??? Correct.
+  
+  Reasoning goes here.
+}
+
+\EXERCISE{2.1.3 C}{9}{
+  If $(\Gamma \vdash \psi)$ and $(\Delta \vdash \psi)$ are correct,
+  then so is $((\Gamma \cap \Delta) \vdash \psi)$.
+}{
+  Incorrect.
+  
+  Here we use the $\cap$ or 'intersection' operator,
+  this will only yield the set of statements in both of the sets.
+  If there is no overlap, then this will yield the empty set ($\varnothing$).
+  
+  For example if we have $( \{ ``x = 1'' \} \vdash ``x > 0'' )$ and $( \{ ``x = 2'' \} \vdash ``x > 0'' )$, both of which are well formed and correct.
+  
+  However $( (\{ ``x = 1'' \} \cap \{ ``x = 2'' \}) \vdash ``x > 0'' )$ is incorrect,
+  as the value of $(\{ ``x = 1'' \} \cap \{ ``x = 2'' \})$ is $\varnothing$ and $( \{ \varnothing \} \vdash ``x > 0'' )$ is incorect.
+  
+  Notice however that this would be true:
+    If $(\Gamma \vdash \psi)$ and $(\Delta \vdash \psi)$ are correct,
+    then so is $((\Gamma \cup \Delta) \vdash \psi)$.
+  as we are using the 'union' ($\cup$) operator
+  which will construct a set containing all the elements from both sets
+  so the value of $(\{ ``x = 1'' \} \cup \{ ``x = 2'' \})$ is $\{ ``x = 1'', ``x = 2'' \}$ and $( \{ ``x = 1'', ``x = 2'' \} \vdash ``x > 0'' )$ is corect.
+}
 
 
 \chapter{Propositional logic}
@@ -113,6 +203,10 @@ A collection of the sequent rules introduced in the text, and the place to find 
 \chapter{syntax examples}
 This section is to keep notes for myself on how to style latex
 
+\url{https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols}
+
+$\cancel{\phi}$
+  
 \begin{prooftree}
  \AxiomC{[D]}
  \noLine
