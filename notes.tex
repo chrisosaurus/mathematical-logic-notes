@@ -8,6 +8,33 @@
 \usepackage{external/bussproofs}
 \usepackage{external/cancel}
 
+% http://tex.stackexchange.com/questions/17877/how-to-show-subsections-and-subsubsections-in-toc
+% show chapter, section, subsection, subsubsection, and paragraph in TOC
+\setcounter{tocdepth}{2}
+% number chapter, and section (but not subsection) throughout text and in TOC
+\setcounter{secnumdepth}{1}
+
+% changing subsection formatting to not include trailing line-break
+% http://tex.stackexchange.com/questions/22576/redefining-sectioning-commands
+% vim `kpsewhich report.cls`
+% shows
+%\newcommand\subsection{\@startsection{subsection}{2}{\z@}%
+%                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+%                                     {1.5ex \@plus .2ex}%
+%                                     {\normalfont\large\bfseries}}
+%...
+%\newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+%                                    {3.25ex \@plus1ex \@minus.2ex}%
+%                                    {-1em}%
+%                                    {\normalfont\normalsize\bfseries}}
+% hybrid - same as report subsection but with negative section from paragraph to suppress trailing newline
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {-1em}% only part changes from subsection - taken from paragraph
+                                     {\normalfont\large\bfseries}}
+\makeatother
+
 \begin{document}
 
 \newcommand{\RULE}[4]{
@@ -27,7 +54,8 @@
       #1 rule (#2 rule)
     }
   }
-  from page #3 \\
+  % attach page number to same line at far right side
+  \hfill page #3 \\
   \indent
   #4
   }
@@ -50,7 +78,8 @@
       Exercise #1
     }
   }
-  from page #2 \\
+  % attach page number to same line at far right side
+  \hfill page #2 \\
   \indent
   #3 \\
   \indent
@@ -70,11 +99,6 @@
 
 % roman page numbering
 \pagenumbering{roman}
-% http://tex.stackexchange.com/questions/17877/how-to-show-subsections-and-subsubsections-in-toc
-% show chapter, section, and subsection in TOC
-\setcounter{tocdepth}{2}
-% number chapter, and section (but not subsection) in TOC
-\setcounter{secnumdepth}{1}
 \tableofcontents
 
 
@@ -86,7 +110,7 @@
 
 
 This collection of notes is considered a Work In Progress
-The current up-to-date version of the notes can be found at https://github.com/mkfifo/mathematical-logic-notes
+The current up-to-date version of the notes can be found at \url{https://github.com/mkfifo/mathematical-logic-notes}
 
 
 The text covered by these notes is ``Mathematical Logic'' by Ian Chriswell and Wilfred Hodges,
